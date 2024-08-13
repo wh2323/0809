@@ -30,6 +30,7 @@ class MyDialog(QDialog):
         self.btn_insertItem.clicked.connect(self.searchStock)  # 검색 버튼 클릭 시 기능 연결
         self.pushButton.clicked.connect(self.refreshDomesticMarket)  # 국내증시 버튼 클릭 시 기능 연결
         self.tableWidget.cellClicked.connect(self.checkBoxStateChanged)  # 체크박스 클릭 시 기능 연결
+        self.tableWidget_2.cellClicked.connect(self.addStockToWatchlistFromCell)
         self.tableWidget.setColumnWidth(5,20) #첫번째 열 크기 고정
         self.tableWidget.setColumnWidth(0,200) #첫번째 열 크기 고정
 
@@ -102,6 +103,10 @@ class MyDialog(QDialog):
     def updateDateTime(self):
         current_time = QDateTime.currentDateTime()
         self.dateTimeEdit.setDateTime(current_time)
+    
+    def addStockToWatchlistFromCell(self, row, column):
+        stock_name = self.tableWidget_2.item(row, 0).text()  # 주식 이름 (0번째 열)
+        self.addToWatchlist(stock_name)
 
     def addCheckBoxesToTable(self):
         for row in range(self.tableWidget.rowCount()):
