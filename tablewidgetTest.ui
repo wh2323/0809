@@ -23,7 +23,7 @@
     <rect>
      <x>10</x>
      <y>70</y>
-     <width>671</width>
+     <width>681</width>
      <height>31</height>
     </rect>
    </property>
@@ -42,45 +42,13 @@
       </property>
      </widget>
     </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
-      <item>
-       <widget class="QPushButton" name="btn_clearItem">
-        <property name="text">
-         <string>해외(＄)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_4">
-        <property name="text">
-         <string>해외(ETF)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_clearItem_2">
-        <property name="text">
-         <string>해외(KRW)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string> 국내증시</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
    </layout>
   </widget>
   <widget class="QDateTimeEdit" name="dateTimeEdit">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>40</y>
+     <x>1090</x>
+     <y>0</y>
      <width>181</width>
      <height>21</height>
     </rect>
@@ -89,7 +57,7 @@
   <widget class="QTableWidget" name="tableWidget_2">
    <property name="geometry">
     <rect>
-     <x>680</x>
+     <x>690</x>
      <y>100</y>
      <width>581</width>
      <height>801</height>
@@ -121,44 +89,24 @@
     </property>
    </column>
   </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>980</x>
-     <y>-10</y>
-     <width>181</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QLineEdit" name="line_insertItem_2">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btn_insertItem_2">
-      <property name="text">
-       <string>검색</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>100</y>
-     <width>671</width>
-     <height>781</height>
+     <width>681</width>
+     <height>801</height>
     </rect>
    </property>
    <column>
     <property name="text">
      <string>종목</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Agency FB</family>
+      <pointsize>9</pointsize>
+     </font>
     </property>
    </column>
    <column>
@@ -186,7 +134,7 @@
    </column>
    <column>
     <property name="text">
-     <string/>
+     <string>//</string>
     </property>
     <property name="textAlignment">
      <set>AlignCenter</set>
@@ -196,22 +144,22 @@
   <widget class="QWidget" name="horizontalLayoutWidget_3">
    <property name="geometry">
     <rect>
-     <x>940</x>
+     <x>950</x>
      <y>70</y>
-     <width>257</width>
+     <width>324</width>
      <height>31</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_4">
     <item>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="Favorite_Add">
       <property name="text">
        <string>관심종목 넣기</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="Favorite_Remove">
       <property name="text">
        <string>관심종목 빼기</string>
       </property>
@@ -230,9 +178,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>40</y>
-     <width>131</width>
-     <height>31</height>
+     <y>30</y>
+     <width>111</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
@@ -248,10 +196,10 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>690</x>
+     <x>700</x>
      <y>60</y>
-     <width>131</width>
-     <height>31</height>
+     <width>111</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
@@ -261,8 +209,59 @@
     </font>
    </property>
    <property name="text">
-    <string>관심 종목</string>
+    <string>관심 종목 </string>
    </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>40</y>
+     <width>403</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <widget class="QPushButton" name="US_ETF">
+        <property name="text">
+         <string>해외(ETF)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="US_Dollar">
+        <property name="text">
+         <string>해외(＄)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="US_KRW">
+        <property name="text">
+         <string>해외(KRW)</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="popular_searchitem">
+      <property name="text">
+       <string>인기검색종목</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="KR_Won">
+      <property name="text">
+       <string> 국내증시</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
