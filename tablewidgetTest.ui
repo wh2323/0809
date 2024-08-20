@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1477</width>
-    <height>900</height>
+    <height>903</height>
    </rect>
   </property>
   <property name="font">
@@ -21,7 +21,7 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>30</x>
      <y>70</y>
      <width>681</width>
      <height>31</height>
@@ -47,7 +47,7 @@
   <widget class="QDateTimeEdit" name="dateTimeEdit">
    <property name="geometry">
     <rect>
-     <x>1090</x>
+     <x>30</x>
      <y>0</y>
      <width>181</width>
      <height>21</height>
@@ -57,10 +57,10 @@
   <widget class="QTableWidget" name="tableWidget_2">
    <property name="geometry">
     <rect>
-     <x>710</x>
+     <x>750</x>
      <y>100</y>
-     <width>601</width>
-     <height>801</height>
+     <width>531</width>
+     <height>791</height>
     </rect>
    </property>
    <column>
@@ -92,10 +92,10 @@
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>30</x>
      <y>100</y>
      <width>681</width>
-     <height>801</height>
+     <height>791</height>
     </rect>
    </property>
    <column>
@@ -144,7 +144,7 @@
   <widget class="QWidget" name="horizontalLayoutWidget_3">
    <property name="geometry">
     <rect>
-     <x>990</x>
+     <x>960</x>
      <y>70</y>
      <width>324</width>
      <height>31</height>
@@ -170,7 +170,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>30</x>
      <y>30</y>
      <width>111</width>
      <height>41</height>
@@ -189,7 +189,7 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>710</x>
+     <x>750</x>
      <y>60</y>
      <width>111</width>
      <height>41</height>
@@ -210,7 +210,7 @@
     <rect>
      <x>190</x>
      <y>40</y>
-     <width>501</width>
+     <width>521</width>
      <height>31</height>
     </rect>
    </property>
