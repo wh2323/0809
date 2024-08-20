@@ -100,13 +100,7 @@
    </property>
    <column>
     <property name="text">
-     <string>종목</string>
-    </property>
-    <property name="font">
-     <font>
-      <family>Agency FB</family>
-      <pointsize>9</pointsize>
-     </font>
+     <string/>
     </property>
    </column>
    <column>
@@ -134,10 +128,7 @@
    </column>
    <column>
     <property name="text">
-     <string>//</string>
-    </property>
-    <property name="textAlignment">
-     <set>AlignCenter</set>
+     <string>체크</string>
     </property>
    </column>
   </widget>
@@ -151,6 +142,13 @@
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_4">
+    <item>
+     <widget class="QPushButton" name="popular_searchitem">
+      <property name="text">
+       <string>관심종목출력</string>
+      </property>
+     </widget>
+    </item>
     <item>
      <widget class="QPushButton" name="Favorite_Add">
       <property name="text">
@@ -245,23 +243,26 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="KR_Won">
+        <property name="text">
+         <string> 국내증시</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
-    <item>
-     <widget class="QPushButton" name="popular_searchitem">
-      <property name="text">
-       <string>인기검색종목</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="KR_Won">
-      <property name="text">
-       <string> 국내증시</string>
-      </property>
-     </widget>
-    </item>
    </layout>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>40</width>
+     <height>34</height>
+    </rect>
+   </property>
   </widget>
  </widget>
  <resources/>

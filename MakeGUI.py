@@ -95,19 +95,19 @@ class MyDialog(QDialog):
     def applyStylesheet(self):
         style_sheet = """
         QDialog {
-            background-color: #696969; 
+            background-color: #faebd7; 
             color: #FFFFFF;
             font-family: Arial, sans-serif;
             font-size: 14px;
         } 
         QTableWidget {
-            background-color: #D3D3D3;
+            background-color: #202027;
             gridline-color: #4F545C;
-            color: #000000;
+            color: #FFFFFF;
             border: none;
         }
         QHeaderView::section {
-            background-color: #4F545C;
+            background-color: #202027;
             color: #FFFFFF;
             padding: 5px;
             border: none;
@@ -120,14 +120,14 @@ class MyDialog(QDialog):
             color: #FFFFFF;
         }
         QPushButton {
-            background-color: #D3D3D3;
-            color: #000000;
+            background-color: #202027;
+            color: #ffffff;
             border: 1px solid #4F545C;
             padding: 5px 10px;
             border-radius: 5px;
         }
         QPushButton:hover {
-            background-color: #696969;
+            background-color: #62626d;
         }
         QCheckBox {
             color: #FFFFFF;
