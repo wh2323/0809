@@ -124,6 +124,11 @@
    </property>
    <column>
     <property name="text">
+     <string/>
+    </property>
+   </column>
+   <column>
+    <property name="text">
      <string>종목</string>
     </property>
    </column>
