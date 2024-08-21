@@ -2,11 +2,14 @@
 <ui version="4.0">
  <class>Dialog</class>
  <widget class="QDialog" name="Dialog">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1477</width>
+    <width>1577</width>
     <height>903</height>
    </rect>
   </property>
@@ -15,8 +18,20 @@
     <family>goorm Sans</family>
    </font>
   </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::NoContextMenu</enum>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
+  </property>
+  <property name="modal">
+   <bool>false</bool>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -49,9 +64,18 @@
     <rect>
      <x>30</x>
      <y>0</y>
-     <width>181</width>
-     <height>21</height>
+     <width>251</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>goorm Sans</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="displayFormat">
+    <string>yyyy-MM-dd AP h:mm:ss</string>
    </property>
   </widget>
   <widget class="QTableWidget" name="tableWidget_2">
@@ -59,7 +83,7 @@
     <rect>
      <x>750</x>
      <y>100</y>
-     <width>531</width>
+     <width>551</width>
      <height>791</height>
     </rect>
    </property>
@@ -100,7 +124,7 @@
    </property>
    <column>
     <property name="text">
-     <string/>
+     <string>종목</string>
     </property>
    </column>
    <column>
@@ -128,7 +152,7 @@
    </column>
    <column>
     <property name="text">
-     <string>체크</string>
+     <string>//</string>
     </property>
    </column>
   </widget>
@@ -137,7 +161,7 @@
     <rect>
      <x>960</x>
      <y>70</y>
-     <width>324</width>
+     <width>341</width>
      <height>31</height>
     </rect>
    </property>
@@ -253,16 +277,6 @@
      </layout>
     </item>
    </layout>
-  </widget>
-  <widget class="QTableWidget" name="tableWidget_3">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>150</y>
-     <width>40</width>
-     <height>34</height>
-    </rect>
-   </property>
   </widget>
  </widget>
  <resources/>
