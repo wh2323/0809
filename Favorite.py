@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
+
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QCheckBox
-from PyQt5.QtGui import QColor
+from PyQt5.QtGui import QColor, QFont, QFontDatabase, QIcon, QPixmap
+from PyQt5.QtCore import Qt
 import os
 import csv
 import json  # JSON 형식으로 저장하기 위해 필요
@@ -21,8 +24,8 @@ class FavoriteOption:
         self.checkbox_state_file_path = os.path.join(stock_report_dir, "checkbox_states.json")
 
         # 체크박스 상태 파일 경로 설정
-        self.checkbox_state_file_path = os.path.join(stock_report_dir, "checkbox_states.json")
-        
+        self.checkbox_state_file_path = os.path.join(stock_report_dir, "checkbox_states.json")# 열 헤더 숨기기
+
         # 초기화 시 파일에서 관심 종목과 체크박스 상태를 로드
         self.loadWatchlistFromFile()
         self.loadCheckBoxStates()
@@ -121,53 +124,112 @@ class FavoriteOption:
             return self.watchlist_etf
         else:
             return []
+    
+
 
     def updateWatchlist(self, page):
+        # 외부 폰트 파일 등록
+        font_db = QFontDatabase()
+
+        # 현재 파일의 디렉토리 경로를 가져옵니다.
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+
+        # 폰트 파일의 전체 경로를 만듭니다.
+        font_path = os.path.join(current_dir, '강원교육모두B.ttf')
+
+        font_id = font_db.addApplicationFont(font_path)
+        font_family = font_db.applicationFontFamilies(font_id)[0] if font_id != -1 else "Arial"
+
+        # 등록된 폰트 설정
+        font = QFont(font_family, 10)  # 폰트 크기 10
         self.favorite_instance.tableWidget_2.setRowCount(0)  # 기존 행 제거
         watchlist = self.getWatchlistForCurrentPage(page)
         for stock in watchlist:
             row_position = self.favorite_instance.tableWidget_2.rowCount()
             self.favorite_instance.tableWidget_2.insertRow(row_position)
 
+            # 이미지 추가
+            image_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'your_image_file.png')
+            icon = QTableWidgetItem()
+            icon.setIcon(QIcon(image_path))  # 이미지 아이콘 설정
+            self.favorite_instance.tableWidget_2.setItem(row_position, 0, icon)  # 첫 번째 열에 이미지 설정
+
+            # 종목 데이터
             name_item = QTableWidgetItem(stock['종목'])
+            name_item.setForeground(QColor("#c3c3c6"))  # 색상 변경
+            name_item.setFont(font)  # 폰트 설정
+
             price_str = str(stock.get('원(￦)', '0'))
             start_price_str = str(stock.get('시작가', '0'))
 
-            if '.' in price_str:
+            if '.' in price_str:  # 소수점이 있는 경우 (USD)
                 today_price = float(price_str)
                 start_price = float(start_price_str)
-                Today_Price_item = QTableWidgetItem(format(today_price, ",.2f"))
-                RiseAndFalls_Percent_item = QTableWidgetItem(format(today_price - start_price, ",.2f"))
-                Start_price_item = QTableWidgetItem(format(start_price, ",.2f"))
-            else:
+                Today_Price_item = QTableWidgetItem(f" {today_price:,.2f}")
+                Start_price_item = QTableWidgetItem(f" {start_price:,.2f}")
+            else:  # 소수점이 없는 경우 (KRW)
                 today_price = int(price_str)
                 start_price = int(start_price_str)
-                Today_Price_item = QTableWidgetItem(format(today_price, ","))
-                RiseAndFalls_Percent_item = QTableWidgetItem(format(today_price - start_price, ","))
-                Start_price_item = QTableWidgetItem(format(start_price, ","))
+                Today_Price_item = QTableWidgetItem(f" {today_price:,}")
+                Start_price_item = QTableWidgetItem(f" {start_price:,}")
 
+            # 등락(￦) 계산
+            price_change = today_price - start_price
+            if price_change > 0:
+                price_change_str = f"+{price_change:,.2f}" if '.' in price_str else f"+{price_change:,}"
+            else:
+                price_change_str = f"{price_change:,.2f}" if '.' in price_str else f"{price_change:,}"
+
+            # 등락(%) 계산
             if start_price != 0:
                 change_percent = ((today_price - start_price) / start_price) * 100
             else:
                 change_percent = 0
 
-            RiseAndFalls_Price_item = QTableWidgetItem(f"{change_percent:.2f}%")
+            # 등락(%) 포맷팅
+            percent_change_str = f"{change_percent:+.2f}%"
 
-            if stock['등락'].startswith('UP'):
-                RiseAndFalls_Percent_item.setForeground(QColor("#f04452"))
-                RiseAndFalls_Price_item.setForeground(QColor("#f04452"))
-            elif stock['등락'].startswith('DOWN'):
-                RiseAndFalls_Percent_item.setForeground(QColor("#3182f6"))
-                RiseAndFalls_Price_item.setForeground(QColor("#3182f6"))
+            # 새로운 QTableWidgetItem 객체 생성
+            RiseAndFalls_Price_item = QTableWidgetItem(f" {price_change_str}")
+            RiseAndFalls_Percent_item = QTableWidgetItem(f" {percent_change_str}")
+
+            # 색상 설정
+            if change_percent > 6.0:
+                color = QColor("#ff0015")
+            elif change_percent > 3.0:
+                color = QColor("#f32b3b")
+            elif change_percent > 0:
+                color = QColor("#f04452")
+            elif change_percent < -6.0:
+                color = QColor("#0068ff")
+            elif change_percent < -3.0:
+                color = QColor("#1b75f7")
+            elif change_percent < 0:
+                color = QColor("#3182f6")
             else:
-                RiseAndFalls_Percent_item.setForeground(QColor("#333d4b"))
-                RiseAndFalls_Price_item.setForeground(QColor("#333d4b"))
+                color = QColor("#c3c3c6")
 
-            self.favorite_instance.tableWidget_2.setItem(row_position, 0, name_item)
-            self.favorite_instance.tableWidget_2.setItem(row_position, 1, Today_Price_item)
-            self.favorite_instance.tableWidget_2.setItem(row_position, 2, RiseAndFalls_Percent_item)
+            # 색상 및 폰트 적용
+            RiseAndFalls_Price_item.setForeground(color)
+            RiseAndFalls_Price_item.setFont(font)
+            RiseAndFalls_Percent_item.setForeground(color)
+            RiseAndFalls_Percent_item.setFont(font)
+            
+
+            # 이미지 추가
+            pixmap = load_image(stock['종목'])
+            icon = QTableWidgetItem()
+            icon.setIcon(QIcon(pixmap))
+            self.favorite_instance.tableWidget_2.setItem(row_position, 0, icon)  # 첫 번째 열에 이미지 설정
+
+            # 나머지 데이터 항목 설정
+            self.favorite_instance.tableWidget_2.setItem(row_position, 1, name_item)
+            self.favorite_instance.tableWidget_2.setItem(row_position, 2, Today_Price_item)
             self.favorite_instance.tableWidget_2.setItem(row_position, 3, RiseAndFalls_Price_item)
-            self.favorite_instance.tableWidget_2.setItem(row_position, 4, Start_price_item)
+            self.favorite_instance.tableWidget_2.setItem(row_position, 4, RiseAndFalls_Percent_item)
+            self.favorite_instance.tableWidget_2.setItem(row_position, 5, Start_price_item)
+        
+
 
     def addSelectedStockToFavorites(self):
         selected_row = self.favorite_instance.tableWidget.currentRow()  # 현재 선택된 행 가져오기
@@ -175,7 +237,7 @@ class FavoriteOption:
             QMessageBox.warning(self.favorite_instance, "경고", "관심 종목을 선택해 주세요.")
             return  
 
-        stock_name = self.favorite_instance.tableWidget.item(selected_row, 0).text()  # 선택된 주식의 이름 가져오기
+        stock_name = self.favorite_instance.tableWidget.item(selected_row, 1).text()  # 선택된 주식의 이름 가져오기
         stock_data = self.favorite_instance.Save  # 현재 저장된 주식 데이터
 
         if not any(stock['종목'] == stock_name for stock in self.getWatchlistForCurrentPage(self.favorite_instance.ThisStockPage)):
@@ -204,7 +266,7 @@ class FavoriteOption:
             if selected_row < 0:
                 QMessageBox.warning(self.favorite_instance, "경고", "제거할 관심 종목을 선택해 주세요.")
                 return
-            stock_name = self.favorite_instance.tableWidget_2.item(selected_row, 0).text()
+            stock_name = self.favorite_instance.tableWidget_2.item(selected_row, 1).text()
 
         # watchlist에서 해당 주식 제거
         found = False
@@ -280,7 +342,7 @@ class FavoriteOption:
         # 체크박스 체크
         row_count = self.favorite_instance.tableWidget.rowCount()
         for row in range(row_count):
-            if self.favorite_instance.tableWidget.item(row, 0).text() == stock_name:
+            if self.favorite_instance.tableWidget.item(row, 1).text() == stock_name:
                 widget = self.favorite_instance.tableWidget.cellWidget(row, 5)
                 if widget is not None:
                     checkbox = widget.findChild(QCheckBox)
@@ -291,3 +353,17 @@ class FavoriteOption:
         self.saveWatchlistToFile()  # 파일로 저장
         self.saveCheckBoxStates()  # 체크박스 상태 저장
         self.updateWatchlist(self.favorite_instance.ThisStockPage)  # UI 업데이트
+
+# Helper function to load the image
+def load_image(stock_name):
+    # 절대 경로를 사용하여 경로를 설정합니다
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    image_path = os.path.join(current_dir, 'cache_images', f"{stock_name}.png")
+    pixmap = QPixmap(image_path)
+    
+    if pixmap.isNull():
+        print(f"Warning: Unable to load image for stock: {stock_name}")
+        pixmap = QPixmap(64, 64)
+        pixmap.fill(Qt.gray)
+    
+    return pixmap
